@@ -47,6 +47,20 @@ impl AuthorizerBuilder {
         AuthorizerBuilder(Some(biscuit::builder::AuthorizerBuilder::new()))
     }
 
+    /// Sets the limits for every evaluation of the built authorizer, including rule
+    /// evaluation, which `authorizeWithLimits` and `queryWithLimits` do not cover
+    #[wasm_bindgen(js_name = setLimits)]
+    pub fn set_limits(&mut self, limits: JsValue) -> Result<(), JsValue> {
+        let limits: RunLimits = serde_wasm_bindgen::from_value(limits)?;
+        self.0 = Some(
+            self.0
+                .take()
+                .expect("empty AuthorizerBuilder")
+                .set_limits(limits.to_rust_limits()),
+        );
+        Ok(())
+    }
+
     #[wasm_bindgen(js_name = buildAuthenticated)]
     pub fn build(self, token: &Biscuit) -> Result<Authorizer, JsValue> {
         Ok(Authorizer(
