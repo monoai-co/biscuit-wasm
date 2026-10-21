@@ -39,7 +39,7 @@ jobs:
         run: |
           uname -sm
           rustc --version --verbose
-          wasm-bindgen --version
+          docker version --format '{{.Server.Version}} {{.Server.Arch}}'
           echo "CARGO_HOME=${CARGO_HOME:-unset} RUSTUP_HOME=${RUSTUP_HOME:-unset} HOME=$HOME PWD=$PWD"
       - name: Rust checks, reproducible build, JS tests and evaluation limits
         run: bash monoai/gates.sh
