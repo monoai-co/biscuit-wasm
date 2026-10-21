@@ -1,0 +1,4 @@
+# yaml-language-server: $schema=./schemas/actionlint.schema.json
+self-hosted-runner:
+  labels:
+    - namespace-profile-linux-monoai-small;overrides.cache-tag=monoai-biscuit-wasm-v1
