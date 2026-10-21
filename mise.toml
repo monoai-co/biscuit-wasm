@@ -1,0 +1,6 @@
+#:schema ./monoai/schemas/mise.schema.json
+[tools]
+rust = { version = "1.99.1", targets = "wasm32-unknown-unknown", components = "clippy,rustfmt" }
+"ubi:wasm-bindgen/wasm-bindgen" = { version = "0.2.129", exe = "wasm-bindgen" }
+node = "24.22.0"
+bun = "1.4.3"
