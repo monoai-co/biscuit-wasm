@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Builds module/ from source with the toolchain pinned in mise.toml.
-# Two runs on any machine produce identical bytes; monoai/gates.sh rebuilds and
-# requires the committed module/ to match.
+# Builds module/ from source. Runs inside monoai/Dockerfile.build; use
+# monoai/rebuild.sh to run it. The image pins the host, Rust and wasm-bindgen, so
+# the output is byte-identical everywhere; monoai/gates.sh requires the committed
+# module/ to match.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 export SOURCE_DATE_EPOCH=0

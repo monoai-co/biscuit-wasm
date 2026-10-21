@@ -8,9 +8,9 @@ cargo fmt --check
 cargo clippy --locked -- -D warnings
 
 echo "== reproducible build matches committed module/"
-bash monoai/build.sh
+bash monoai/rebuild.sh
 if ! git diff --exit-code --stat -- module; then
-  echo "module/ differs from a fresh build; run monoai/build.sh and commit the result" >&2
+  echo "module/ differs from a fresh build; run monoai/rebuild.sh and commit the result" >&2
   exit 1
 fi
 if [ -n "$(git ls-files --others --exclude-standard -- module)" ]; then
