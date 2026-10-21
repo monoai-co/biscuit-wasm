@@ -668,7 +668,7 @@ impl<'de> Visitor<'de> for TermVisitor {
 
             _ => Err(Error::custom(format!(
                 "unexpected key: {}, expecting date, bytes, set or map",
-                &k
+                k
             ))),
         }
     }
