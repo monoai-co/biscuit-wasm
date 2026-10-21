@@ -35,5 +35,19 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             target
+      - name: Record build environment
+        run: |
+          uname -sm
+          rustc --version --verbose
+          wasm-bindgen --version
+          echo "CARGO_HOME=${CARGO_HOME:-unset} RUSTUP_HOME=${RUSTUP_HOME:-unset} HOME=$HOME PWD=$PWD"
       - name: Rust checks, reproducible build, JS tests and evaluation limits
         run: bash monoai/gates.sh
+      - name: Upload the rebuilt module when it differs
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rebuilt-module
+          path: module/
+          if-no-files-found: ignore
+          retention-days: 7
