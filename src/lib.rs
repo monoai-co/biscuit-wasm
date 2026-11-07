@@ -18,9 +18,6 @@ pub use authorizer::*;
 pub use builder::*;
 pub use crypto::*;
 
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
-
 /// a Biscuit token
 ///
 /// it can produce an attenuated or sealed token, or be used
