@@ -25,3 +25,8 @@ echo "== evaluation limits on every consumer runtime"
 mise exec node@22.23.1 -- node monoai/test/limits.mjs
 mise exec node@24.22.0 -- node monoai/test/limits.mjs
 mise exec bun@1.4.3 -- bun monoai/test/limits.mjs
+
+echo "== linear memory growth on every consumer runtime"
+mise exec node@22.23.1 -- node monoai/test/memory.mjs
+mise exec node@24.22.0 -- node monoai/test/memory.mjs
+mise exec bun@1.4.3 -- bun monoai/test/memory.mjs

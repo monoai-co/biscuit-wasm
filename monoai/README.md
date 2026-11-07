@@ -12,6 +12,8 @@
 
 - `src/authorizer.rs`: `AuthorizerBuilder.setLimits`.
 - `src/builder.rs`: one redundant borrow removed for clippy 1.99.
+- `src/lib.rs`, `Cargo.toml`: no `wee_alloc` global allocator; it retains freed memory, so
+  linear memory grew with every authorizer (measured ~155 KB per Mosaic decision).
 - `Cargo.lock`: `wasm-bindgen` 0.2.129 and `js-sys`/`web-sys` 0.3.106. 0.2.104 emits its
   cast imports in hash-map order, so two builds of one input differ.
 - `mise.toml`: host tools for checks and tests: Rust, Node and Bun.
@@ -30,8 +32,8 @@ mise exec -- bash monoai/gates.sh
 `linux/amd64` Rust image and a checksum-pinned `wasm-bindgen` CLI. Cargo's metadata
 hashes include the host triple, so builds on different hosts lay out data differently;
 the image fixes the host and the bytes. The gate rebuilds and fails if the committed
-`module/` differs. `monoai/test/limits.mjs` runs under Node 22, Node 24 and Bun, the
-runtimes of this package's consumers. Install the hook with
+`module/` differs. `monoai/test/limits.mjs` and `monoai/test/memory.mjs` run under Node 22,
+Node 24 and Bun, the runtimes of this package's consumers. Install the hook with
 `git config core.hooksPath monoai/hooks`.
 
 ## Updating
