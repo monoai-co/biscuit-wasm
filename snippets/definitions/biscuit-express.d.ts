@@ -2,7 +2,7 @@
  * Function building an authorizer from a request, or an authorizer directly,
  * when it doesn't depend on the request
  */
-export type AuthorizerBuilder = Authorizer | ((req: any) => Authorizer);
+export type MiddlewareAuthorizer = Authorizer | ((req: any) => Authorizer);
 
 /**
  * Phase of the authorization process where the error happened.
@@ -26,11 +26,11 @@ export type BiscuitMiddlewareOptions = {
   /**
    * Authorizer policies which will be evaluated before the per-endpoint policies
    */
-  priorityAuthorizer: AuthorizerBuilder;
+  priorityAuthorizer: MiddlewareAuthorizer;
   /**
    * Authorizer policies which will be evaluated after the per-endpoint policies
    */
-  fallbackAuthorizer: AuthorizerBuilder;
+  fallbackAuthorizer: MiddlewareAuthorizer;
   /**
    * Custom function for extracting the token string from the request. The default
    * behaviour expects an `Authorization: Bearer` header.
@@ -59,5 +59,5 @@ export type BiscuitMiddlewareOptions = {
 export function middleware(
   options: BiscuitMiddlewareOptions
 ): (
-  makeAuthorizer: AuthorizerBuilder
+  makeAuthorizer: MiddlewareAuthorizer
 ) => (req: any, res: any, next: any) => any;

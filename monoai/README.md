@@ -12,6 +12,9 @@
 
 - `src/authorizer.rs`: `AuthorizerBuilder.setLimits`.
 - `src/builder.rs`: one redundant borrow removed for clippy 1.99.
+- `snippets/definitions/biscuit-express.d.ts`: the middleware authorizer alias is
+  `MiddlewareAuthorizer`. Upstream names it `AuthorizerBuilder`, which duplicates the class
+  in `module/biscuit.d.ts` and fails a type check that includes library declarations.
 - `src/lib.rs`, `Cargo.toml`: no `wee_alloc` global allocator; it retains freed memory, so
   linear memory grew with every authorizer (measured ~155 KB per Mosaic decision).
 - `Cargo.lock`: `wasm-bindgen` 0.2.129 and `js-sys`/`web-sys` 0.3.106. 0.2.104 emits its
